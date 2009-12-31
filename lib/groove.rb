@@ -1,0 +1,6 @@
+require 'rubygems'
+require 'x'
+require 'groove/sinatra'
+require 'groove/mongo'
+require 'groove/effigy'
+require 'groove/hoptoad'
