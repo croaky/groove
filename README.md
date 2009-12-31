@@ -15,7 +15,24 @@ groove weekapaug
 
 cd weekapaug
 
-vim templates/index.html
+cat config.ru
+
+    require 'groove'
+    Groove.config = { :db          => ENV['DATABASE']     || 'weekapaug',
+                      :db_url      => ENV['DATABASE_URL'] || 'localhost',
+                      :db_user     => ENV['DATABASE_USER'],
+                      :db_password => ENV['DATABASE_PASSWORD'],
+                      :hoptoad     => ENV['HOPTOAD'] }
+    require 'app'
+    run Sinatra::Application
+
+cat app.rb
+
+    get '/' do
+      effigy :index
+    end
+
+cat templates/index.html
 
     <!DOCTYPE html>
     <html>

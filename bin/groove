@@ -3,22 +3,39 @@
 require 'rubygems'
 require 'thor'
 
-module Grooove
-  Rackup = <<-RUBY
+class Groove < Thor::Group
+  include Thor::Actions
+
+  argument :name
+
+  def create_rackup
+    create_file("#{name}/config.ru") do
+<<-RUBY
+require 'groove'
 Groove.config = { :db          => ENV['DATABASE']     || '#{name}',
                   :db_url      => ENV['DATABASE_URL'] || 'localhost',
                   :db_user     => ENV['DATABASE_USER'],
                   :db_password => ENV['DATABASE_PASSWORD'],
                   :hoptoad     => ENV['HOPTOAD'] }
+require 'app'
+run Sinatra::Application
 RUBY
+    end
+  end
 
-  App = <<-RUBY
+  def create_app
+    create_file("#{name}/app.rb") do
+<<-RUBY
 get '/' do
   effigy :index
 end
 RUBY
+    end
+  end
 
-  Template = <<-HTML
+  def create_template
+    create_file("#{name}/templates/index.html") do
+<<-HTML
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,34 +46,18 @@ RUBY
   </body>
 </html>
 HTML
+    end
+  end
 
-  View = <<-RUBY
+  def create_view
+    create_file("#{name}/views/index.rb") do
+<<-RUBY
 class IndexView < Effigy::View
   def transform
   end
 end
 RUBY
-end
-
-class Groove < Thor::Group
-  include Thor::Actions
-
-  argument :name
-
-  def create_rackup
-    create_file("#{name}/config.ru") { Grooove::Rackup }
-  end
-
-  def create_app
-    create_file("#{name}/app.rb") { Grooove::App }
-  end
-
-  def create_template
-    create_file("#{name}/templates/index.html") { Grooove::Template }
-  end
-
-  def create_view
-    create_file("#{name}/views/index.rb") { Grooove::View }
+    end
   end
 end
 
