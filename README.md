@@ -32,8 +32,9 @@ vim templates/weekapaug.html
 
 vim views/weekapaug.rb
 
-    class IndexView < Effigy::View
+    class Weekapaug < Effigy::View
       def transform
+        text('h1', DB['grooves'].find(:name => 'weekapaug'))
       end
     end
 
