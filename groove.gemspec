@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
      "README.md",
      "Rakefile",
      "VERSION",
-     "groove-0.0.2.gem",
+     "groove-0.0.3.gem",
      "groove.gemspec",
      "lib/groove.rb",
      "lib/groove/effigy.rb",
