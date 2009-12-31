@@ -6,7 +6,7 @@ A web application stack composed of Sinatra, MongoDB, Effigy, and Hoptoad.
 Usage
 -----
 
-thor weekapaug
+thor groove weekapaug
 
 vim templates/index.html
 
