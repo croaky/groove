@@ -8,23 +8,13 @@ Usage
 
 groove weekapaug
 
+    create  weekapaug/.gems
     create  weekapaug/config.ru
     create  weekapaug/app.rb
     create  weekapaug/templates/index.html
     create  weekapaug/views/index.rb
 
 cd weekapaug
-
-cat config.ru
-
-    require 'groove'
-    Groove.config = { :db          => ENV['DATABASE']     || 'weekapaug',
-                      :db_url      => ENV['DATABASE_URL'] || 'localhost',
-                      :db_user     => ENV['DATABASE_USER'],
-                      :db_password => ENV['DATABASE_PASSWORD'],
-                      :hoptoad     => ENV['HOPTOAD'] }
-    require 'app'
-    run Sinatra::Application
 
 cat app.rb
 

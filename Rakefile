@@ -12,6 +12,7 @@ Jeweler::Tasks.new do |gem|
 
   gem.add_dependency('sinatra')
   gem.add_dependency('mongo')
+  gem.add_dependency('mongo_ext')
   gem.add_dependency('effigy')
   gem.add_dependency('rack_hoptoad')
   gem.add_dependency('x')

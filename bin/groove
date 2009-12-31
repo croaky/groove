@@ -8,6 +8,14 @@ class Groove < Thor::Group
 
   argument :name
 
+  def create_dotfile
+    create_file("#{name}/.gems") do
+<<-RUBY
+groove
+RUBY
+    end
+  end
+
   def create_rackup
     create_file("#{name}/config.ru") do
 <<-RUBY
