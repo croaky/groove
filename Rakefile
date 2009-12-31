@@ -7,6 +7,8 @@ Jeweler::Tasks.new do |gem|
   gem.email       = "dcroak@thoughtbot.com"
   gem.homepage    = "http://github.com/dancroak/groove"
   gem.authors     = ["Dan Croak"]
+  gem.bindir      = "bin"
+  gem.executables = ["groove"]
 
   gem.add_dependency('x')
   gem.add_dependency('sinatra')

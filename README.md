@@ -6,24 +6,9 @@ A web application stack composed of Sinatra, MongoDB, Effigy, and Hoptoad.
 Usage
 -----
 
-vim config.ru
+thor weekapaug
 
-    require 'groove'
-    Groove.config = { :db          => ENV['DATABASE']     || 'weekapaug',
-                      :db_url      => ENV['DATABASE_URL'] || 'localhost',
-                      :db_user     => ENV['DATABASE_USER'],
-                      :db_password => ENV['DATABASE_PASSWORD'],
-                      :hoptoad     => ENV['HOPTOAD'] }
-    require 'app'
-    run Sinatra::Application
-
-vim app.rb
-
-    get '/' do
-      effigy :weekapaug
-    end
-
-vim templates/weekapaug.html
+vim templates/index.html
 
     <!DOCTYPE html>
     <html>
@@ -35,9 +20,9 @@ vim templates/weekapaug.html
       </body>
     </html>
 
-vim views/weekapaug.rb
+vim views/index.rb
 
-    class Weekapaug < Effigy::View
+    class IndexView < Effigy::View
       def transform
         text('h1', DB['grooves'].find(:name => 'weekapaug'))
       end
@@ -53,5 +38,4 @@ heroku config
     DATABASE_USER     => user
     DATABASE_PASSWORD => password
     HOPTOAD           => apikey123
-    RACK_ENV          => production
 
