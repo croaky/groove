@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
      "README.md",
      "Rakefile",
      "VERSION",
-     "bin/groove",
      "groove.gemspec",
      "lib/groove.rb",
      "lib/groove/effigy.rb",
@@ -41,24 +40,27 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<x>, [">= 0"])
       s.add_runtime_dependency(%q<sinatra>, [">= 0"])
       s.add_runtime_dependency(%q<mongo>, [">= 0"])
       s.add_runtime_dependency(%q<effigy>, [">= 0"])
       s.add_runtime_dependency(%q<rack_hoptoad>, [">= 0"])
+      s.add_runtime_dependency(%q<x>, [">= 0"])
+      s.add_runtime_dependency(%q<thor>, [">= 0"])
     else
-      s.add_dependency(%q<x>, [">= 0"])
       s.add_dependency(%q<sinatra>, [">= 0"])
       s.add_dependency(%q<mongo>, [">= 0"])
       s.add_dependency(%q<effigy>, [">= 0"])
       s.add_dependency(%q<rack_hoptoad>, [">= 0"])
+      s.add_dependency(%q<x>, [">= 0"])
+      s.add_dependency(%q<thor>, [">= 0"])
     end
   else
-    s.add_dependency(%q<x>, [">= 0"])
     s.add_dependency(%q<sinatra>, [">= 0"])
     s.add_dependency(%q<mongo>, [">= 0"])
     s.add_dependency(%q<effigy>, [">= 0"])
     s.add_dependency(%q<rack_hoptoad>, [">= 0"])
+    s.add_dependency(%q<x>, [">= 0"])
+    s.add_dependency(%q<thor>, [">= 0"])
   end
 end
 

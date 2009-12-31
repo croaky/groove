@@ -1,22 +1,29 @@
 Groove
 ======
 
-A web application stack composed of Sinatra, MongoDB, Effigy, and Hoptoad.
+Generator to create a Sinatra, MongoDB, Effigy, and Hoptoad web app.
 
 Usage
 -----
 
-thor groove weekapaug
+groove weekapaug
+
+    create  weekapaug/config.ru
+    create  weekapaug/app.rb
+    create  weekapaug/templates/index.html
+    create  weekapaug/views/index.rb
+
+cd weekapaug
 
 vim templates/index.html
 
     <!DOCTYPE html>
     <html>
       <head>
-        <title>weekapaug groove</title>
+        <title>weekapaug</title>
       </head>
       <body>
-        <h1>sharing in the weekapaug groove</h1>
+        <h1>weekapaug</h1>
       </body>
     </html>
 
@@ -38,4 +45,3 @@ heroku config
     DATABASE_USER     => user
     DATABASE_PASSWORD => password
     HOPTOAD           => apikey123
-

@@ -1,71 +1,63 @@
 #!/usr/bin/env ruby
-# -*- mode: ruby -*-
 
+require 'rubygems'
 require 'thor'
+
+module Grooove
+  Rackup = <<-RUBY
+Groove.config = { :db          => ENV['DATABASE']     || '#{name}',
+                  :db_url      => ENV['DATABASE_URL'] || 'localhost',
+                  :db_user     => ENV['DATABASE_USER'],
+                  :db_password => ENV['DATABASE_PASSWORD'],
+                  :hoptoad     => ENV['HOPTOAD'] }
+RUBY
+
+  App = <<-RUBY
+get '/' do
+  effigy :index
+end
+RUBY
+
+  Template = <<-HTML
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>#{name}</title>
+  </head>
+  <body>
+    <h1>#{name}</h1>
+  </body>
+</html>
+HTML
+
+  View = <<-RUBY
+class IndexView < Effigy::View
+  def transform
+  end
+end
+RUBY
+end
 
 class Groove < Thor::Group
   include Thor::Actions
 
   argument :name
 
-  def create_directory
-    directory(name)
-  end
-
   def create_rackup
-    create_file("#{name}/config.ru") do
-      <<-RUBY
-        Groove.config = { :db          => ENV['DATABASE']     || '#{name}',
-                          :db_url      => ENV['DATABASE_URL'] || 'localhost',
-                          :db_user     => ENV['DATABASE_USER'],
-                          :db_password => ENV['DATABASE_PASSWORD'],
-                          :hoptoad     => ENV['HOPTOAD'] }
-      RUBY
-    end
+    create_file("#{name}/config.ru") { Grooove::Rackup }
   end
 
   def create_app
-    create_file("#{name}/app.rb") do
-      <<-RUBY
-        get '/' do
-          effigy :index
-        end
-      RUBY
-    end
+    create_file("#{name}/app.rb") { Grooove::App }
   end
 
-  def create_templates_directory
-    directory("#{name}/templates")
+  def create_template
+    create_file("#{name}/templates/index.html") { Grooove::Template }
   end
 
-  def create_index_template
-    create_file("#{name}/templates/index.html") do
-      <<-HTML
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>#{name}</title>
-          </head>
-          <body>
-            <h1>#{name}</h1>
-          </body>
-        </html>
-      HTML
-    end
-  end
-
-  def create_views_directory
-    directory("#{name}/views")
-  end
-
-  def create_index_template
-    create_file("#{name}/views/index.rb") do
-      <<-RUBY
-        class IndexView < Effigy::View
-          def transform
-          end
-        end
-      RUBY
-    end
+  def create_view
+    create_file("#{name}/views/index.rb") { Grooove::View }
   end
 end
+
+Groove.start
