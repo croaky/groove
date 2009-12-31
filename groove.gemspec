@@ -18,7 +18,9 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
      "README.md",
+     "Rakefile",
      "VERSION",
+     "groove.gemspec",
      "lib/groove.rb",
      "lib/groove/effigy.rb",
      "lib/groove/hoptoad.rb",
