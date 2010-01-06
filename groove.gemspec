@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{groove}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Croak"]
-  s.date = %q{2009-12-31}
+  s.date = %q{2010-01-05}
   s.default_executable = %q{groove}
   s.description = %q{Generator to create a Sinatra, MongoDB, Effigy, and Hoptoad web app.}
   s.email = %q{dcroak@thoughtbot.com}
@@ -25,11 +25,7 @@ Gem::Specification.new do |s|
      "bin/groove",
      "groove.gemspec",
      "install.rb",
-     "lib/groove.rb",
-     "lib/groove/effigy.rb",
-     "lib/groove/hoptoad.rb",
-     "lib/groove/mongo.rb",
-     "lib/groove/sinatra.rb"
+     "lib/groove.rb"
   ]
   s.homepage = %q{http://github.com/dancroak/groove}
   s.rdoc_options = ["--charset=UTF-8"]
