@@ -11,7 +11,8 @@ class Groove < Thor::Group
   def create_dotfile
     create_file("#{name}/.gems") do
 <<-RUBY
-groove
+sinatra-effigy
+sinatra-mongoid
 RUBY
     end
   end
@@ -19,13 +20,11 @@ RUBY
   def create_rackup
     create_file("#{name}/config.ru") do
 <<-RUBY
-require 'groove'
-Groove.config = { :db          => ENV['DATABASE']     || '#{name}',
-                  :db_url      => ENV['DATABASE_URL'] || 'localhost',
-                  :db_user     => ENV['DATABASE_USER'],
-                  :db_password => ENV['DATABASE_PASSWORD'],
-                  :hoptoad     => ENV['HOPTOAD'] }
 require 'app'
+require 'rack_hoptoad'
+
+use Rack::HoptoadNotifier, ENV['HOPTOAD'] || '1234'
+
 run Sinatra::Application
 RUBY
     end
@@ -34,6 +33,17 @@ RUBY
   def create_app
     create_file("#{name}/app.rb") do
 <<-RUBY
+require 'rubygems'
+require 'sinatra'
+require 'sinatra/effigy'
+require 'sinatra/mongoid'
+
+set :mongo_db, '#{name}'
+
+configure :production do
+  enable :raise_errors
+end
+
 get '/' do
   effigy :index
 end
