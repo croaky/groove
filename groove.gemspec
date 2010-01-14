@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{groove}
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Croak"]
-  s.date = %q{2010-01-05}
+  s.date = %q{2010-01-14}
   s.default_executable = %q{groove}
   s.description = %q{Generator to create a Sinatra, MongoDB, Effigy, and Hoptoad web app.}
   s.email = %q{dcroak@thoughtbot.com}
@@ -24,8 +24,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "bin/groove",
      "groove.gemspec",
-     "install.rb",
-     "lib/groove.rb"
+     "install.rb"
   ]
   s.homepage = %q{http://github.com/dancroak/groove}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -38,29 +37,20 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<sinatra>, [">= 0"])
-      s.add_runtime_dependency(%q<mongo>, [">= 0"])
-      s.add_runtime_dependency(%q<mongo_ext>, [">= 0"])
-      s.add_runtime_dependency(%q<effigy>, [">= 0"])
+      s.add_runtime_dependency(%q<sinatra-effigy>, [">= 0"])
+      s.add_runtime_dependency(%q<sinatra-mongoid>, [">= 0"])
       s.add_runtime_dependency(%q<rack_hoptoad>, [">= 0"])
-      s.add_runtime_dependency(%q<x>, [">= 0"])
       s.add_runtime_dependency(%q<thor>, [">= 0"])
     else
-      s.add_dependency(%q<sinatra>, [">= 0"])
-      s.add_dependency(%q<mongo>, [">= 0"])
-      s.add_dependency(%q<mongo_ext>, [">= 0"])
-      s.add_dependency(%q<effigy>, [">= 0"])
+      s.add_dependency(%q<sinatra-effigy>, [">= 0"])
+      s.add_dependency(%q<sinatra-mongoid>, [">= 0"])
       s.add_dependency(%q<rack_hoptoad>, [">= 0"])
-      s.add_dependency(%q<x>, [">= 0"])
       s.add_dependency(%q<thor>, [">= 0"])
     end
   else
-    s.add_dependency(%q<sinatra>, [">= 0"])
-    s.add_dependency(%q<mongo>, [">= 0"])
-    s.add_dependency(%q<mongo_ext>, [">= 0"])
-    s.add_dependency(%q<effigy>, [">= 0"])
+    s.add_dependency(%q<sinatra-effigy>, [">= 0"])
+    s.add_dependency(%q<sinatra-mongoid>, [">= 0"])
     s.add_dependency(%q<rack_hoptoad>, [">= 0"])
-    s.add_dependency(%q<x>, [">= 0"])
     s.add_dependency(%q<thor>, [">= 0"])
   end
 end
