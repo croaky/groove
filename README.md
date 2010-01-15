@@ -1,18 +1,20 @@
 Groove
 ======
 
-Generator to create a Sinatra, MongoDB, Effigy, and Hoptoad web app.
+Generator to create a web application stack of
+Sinatra, MongoDB, jQuery, HTML5, Effigy, and Hoptoad web app.
 
 Usage
 -----
 
 groove weekapaug
 
-    create  weekapaug/.gems
+    create  weekapaug/Gemfile
     create  weekapaug/config.ru
     create  weekapaug/app.rb
     create  weekapaug/templates/index.html
     create  weekapaug/views/index.rb
+    create  weekapaug/.gitignore
 
 Example deploy
 --------------
