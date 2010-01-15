@@ -8,11 +8,18 @@ class Groove < Thor::Group
 
   argument :name
 
-  def create_dotfile
-    create_file("#{name}/.gems") do
+  def create_gemfile
+    create_file("#{name}/.Gemfile") do
 <<-RUBY
-sinatra-effigy
-sinatra-mongoid
+clear_sources
+bundle_path "vendor/bundler_gems"
+
+source "http://gemcutter.org"
+
+gem 'sinatra'
+
+gem 'sinatra-effigy',  :require_as => 'sinatra/effigy'
+gem 'sinatra-mongoid', :require_as => 'sinatra/mongoid'
 RUBY
     end
   end
@@ -33,10 +40,10 @@ RUBY
   def create_app
     create_file("#{name}/app.rb") do
 <<-RUBY
-require 'rubygems'
-require 'sinatra'
-require 'sinatra/effigy'
-require 'sinatra/mongoid'
+require File.dirname(__FILE__) + '/vendor/gems/environment'
+Bundler.require_env
+
+set :app_file, __FILE__
 
 set :mongo_db, '#{name}'
 
@@ -74,6 +81,19 @@ class IndexView < Effigy::View
   def transform
   end
 end
+RUBY
+    end
+  end
+
+  def create_gitignore
+    create_file("#{name}/.gitignore") do
+<<-RUBY
+*.swp
+vendor/bundler_gems
+vendor/gems/gems
+vendor/gems/specifications
+vendor/gems/doc
+vendor/gems/environment.rb
 RUBY
     end
   end
