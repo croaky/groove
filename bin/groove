@@ -92,7 +92,6 @@ RUBY
   def create_gitignore
     create_file("#{name}/.gitignore") do
 <<-RUBY
-*.swp
 vendor/bundler_gems
 vendor/gems/gems
 vendor/gems/specifications
