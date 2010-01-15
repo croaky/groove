@@ -12,8 +12,6 @@ class Groove < Thor::Group
     create_file("#{name}/.Gemfile") do
 <<-RUBY
 clear_sources
-bundle_path "vendor/bundler_gems"
-
 source "http://gemcutter.org"
 
 gem 'sinatra'
@@ -92,11 +90,9 @@ RUBY
   def create_gitignore
     create_file("#{name}/.gitignore") do
 <<-RUBY
-vendor/bundler_gems
 vendor/gems/gems
 vendor/gems/specifications
 vendor/gems/doc
-vendor/gems/environment.rb
 RUBY
     end
   end
