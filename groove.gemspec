@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{groove}
-  s.version = "0.1.5"
+  s.version = "0.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Croak"]
-  s.date = %q{2010-01-14}
+  s.date = %q{2010-01-17}
   s.default_executable = %q{groove}
   s.description = %q{Generator to create a Sinatra, MongoDB, Effigy, and Hoptoad web app.}
   s.email = %q{dcroak@thoughtbot.com}
