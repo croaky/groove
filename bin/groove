@@ -9,7 +9,7 @@ class Groove < Thor::Group
   argument :name
 
   def create_gemfile
-    create_file("#{name}/.Gemfile") do
+    create_file("#{name}/Gemfile") do
 <<-RUBY
 clear_sources
 source "http://gemcutter.org"
