@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'thor'
+require 'thor/group'
 
 class Groove < Thor::Group
   include Thor::Actions
@@ -11,13 +11,13 @@ class Groove < Thor::Group
   def create_gemfile
     create_file("#{name}/Gemfile") do
 <<-RUBY
-clear_sources
-source "http://gemcutter.org"
+source :gemcutter.org
 
 gem 'sinatra'
 
 gem 'sinatra-effigy',  :require_as => 'sinatra/effigy'
 gem 'sinatra-mongoid', :require_as => 'sinatra/mongoid'
+gem 'hoptoad_notifier'
 RUBY
     end
   end
@@ -26,9 +26,6 @@ RUBY
     create_file("#{name}/config.ru") do
 <<-RUBY
 require 'app'
-require 'rack_hoptoad'
-
-use Rack::HoptoadNotifier, ENV['HOPTOAD'] || '1234'
 
 run Sinatra::Application
 RUBY
@@ -38,14 +35,20 @@ RUBY
   def create_app
     create_file("#{name}/app.rb") do
 <<-RUBY
-require File.dirname(__FILE__) + '/vendor/gems/environment'
-Bundler.require_env
+begin
+  require File.expand_path('../.bundle/environment', __FILE__)
+rescue LoadError
+  require 'rubygems'
+  require 'bundler'
+  Bundler.setup
+end
 
 set :app_file, __FILE__
 
 set :mongo_db, '#{name}'
 
 configure :production do
+  use HoptoadNotifier::Rack
   enable :raise_errors
 end
 

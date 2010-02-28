@@ -10,9 +10,6 @@ Jeweler::Tasks.new do |gem|
   gem.bindir      = "bin"
   gem.executables = ["groove"]
 
-  gem.add_dependency('sinatra-effigy')
-  gem.add_dependency('sinatra-mongoid')
-  gem.add_dependency('rack_hoptoad')
   gem.add_dependency('thor')
 end
 
