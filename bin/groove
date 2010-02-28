@@ -11,13 +11,12 @@ class Groove < Thor::Group
   def create_gemfile
     create_file("#{name}/Gemfile") do
 <<-RUBY
-source :gemcutter.org
+source :gemcutter
 
 gem 'sinatra'
-
+gem 'hoptoad_notifier'
 gem 'sinatra-effigy',  :require_as => 'sinatra/effigy'
 gem 'sinatra-mongoid', :require_as => 'sinatra/mongoid'
-gem 'hoptoad_notifier'
 RUBY
     end
   end
@@ -35,13 +34,8 @@ RUBY
   def create_app
     create_file("#{name}/app.rb") do
 <<-RUBY
-begin
-  require File.expand_path('../.bundle/environment', __FILE__)
-rescue LoadError
-  require 'rubygems'
-  require 'bundler'
-  Bundler.setup
-end
+require File.expand_path('.bundle/environment', File.dirname(__FILE__))
+Bundler.require
 
 set :app_file, __FILE__
 
@@ -93,9 +87,7 @@ RUBY
   def create_gitignore
     create_file("#{name}/.gitignore") do
 <<-RUBY
-vendor/gems/gems
-vendor/gems/specifications
-vendor/gems/doc
+.bundle
 RUBY
     end
   end
