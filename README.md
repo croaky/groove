@@ -2,7 +2,7 @@ Groove
 ======
 
 Generator to create a web application consisting of
-Sinatra, MongoDB, jQuery, HTML5, Effigy, and Hoptoad.
+HTML5, Less CSS, jQuery, Effigy, Sinatra, MongoDB, and Hoptoad.
 
 Usage
 -----
@@ -14,6 +14,9 @@ groove weekapaug
     create  weekapaug/app.rb
     create  weekapaug/templates/index.html
     create  weekapaug/views/index.rb
+    create  weekapaug/public/css/screen.css
+    create  weekapaug/public/css/screen.less
+    create  weekapaug/README.md
     create  weekapaug/.gitignore
 
 Example deploy

@@ -15,8 +15,8 @@ source :gemcutter
 
 gem 'sinatra'
 gem 'hoptoad_notifier'
-gem 'sinatra-effigy',  :require_as => 'sinatra/effigy'
-gem 'sinatra-mongoid', :require_as => 'sinatra/mongoid'
+gem 'sinatra-effigy',  :require => 'sinatra/effigy'
+gem 'sinatra-mongoid', :require => 'sinatra/mongoid'
 RUBY
     end
   end
@@ -61,6 +61,7 @@ RUBY
   <head>
     <meta charset="utf-8">
     <title>#{name}</title>
+    <link rel="stylesheet" href="/css/screen.css" media="screen">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" async></script>
   </head>
   <body>
@@ -84,11 +85,98 @@ RUBY
     end
   end
 
+  def create_stylesheet
+    create_file("#{name}/public/css/screen.css") do
+<<-CSS
+CSS
+    end
+  end
+
+  def create_less
+    create_file("#{name}/public/css/screen.less") do
+<<-CSS
+.rounded-corners (@radius: 5px) {
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.shadow (@x-offset: 1px, @y-offset: 1px, @blur: 1px, @color: @white) {
+  box-shadow: @x-offset @y-offset @blur @color;
+  -moz-box-shadow: @x-offset @y-offset @blur @color;
+  -webkit-box-shadow: @x-offset @y-offset @blur @color;
+}
+
+.opacity (@opacity: 0.7) {
+  -moz-opacity: @opacity;
+  -khtml-opacity: @opacity;
+  opacity: @opacity;
+}
+
+.center {
+  margin: 0 auto;
+  position: relative;
+}
+
+.bye-text {
+  text-indent: -9999px;
+  *line-height: 999px;
+}
+
+.text-shadow (@color: @black) {
+  text-shadow: @color 1px 1px 0;
+}
+CSS
+    end
+  end
+
   def create_gitignore
     create_file("#{name}/.gitignore") do
 <<-RUBY
 .bundle
 RUBY
+    end
+  end
+
+  def create_readme
+    create_file("#{name}/README.md") do
+<<-MARKDOWN
+Setup
+-----
+
+  sudo gem uninstall bundler (all versions)
+  sudo gem install bundler -v=0.9.6
+  sudo gem install shotgun thin less
+
+Gems
+----
+
+  bundle install
+  bundle lock
+
+Development
+-----------
+
+In one shell:
+
+  shotgun config.ru
+
+In another shell:
+
+  mongod
+
+In another shell:
+
+  cd public/css
+  lessc screen.less --watch
+
+This will automatically update .css files of the same name when you change
+your .less files.
+
+Make all CSS changes in .less files.
+
+Docs at http://lesscss.org/
+MARKDOWN
     end
   end
 end
