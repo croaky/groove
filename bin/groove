@@ -63,6 +63,7 @@ RUBY
     <title>#{name}</title>
     <link rel="stylesheet" href="/css/screen.css" media="screen">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" async></script>
+    <script src="/js/app.js" async></script>
   </head>
   <body>
     <header>
@@ -101,7 +102,7 @@ CSS
   border-radius: @radius;
 }
 
-.shadow (@x-offset: 1px, @y-offset: 1px, @blur: 1px, @color: @white) {
+.shadow (@x-offset: 1px, @y-offset: 1px, @blur: 1px, @color: #fff) {
   box-shadow: @x-offset @y-offset @blur @color;
   -moz-box-shadow: @x-offset @y-offset @blur @color;
   -webkit-box-shadow: @x-offset @y-offset @blur @color;
@@ -123,10 +124,19 @@ CSS
   *line-height: 999px;
 }
 
-.text-shadow (@color: @black) {
+.text-shadow (@color: #000) {
   text-shadow: @color 1px 1px 0;
 }
 CSS
+    end
+  end
+
+  def create_javascript
+    create_file("#{name}/public/js/app.js") do
+<<-JS
+$(document).ready(function() {
+});
+JS
     end
   end
 
